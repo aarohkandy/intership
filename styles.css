@@ -205,6 +205,10 @@ h1 {
   background: var(--paper);
 }
 
+.settings-panel[hidden] {
+  display: none;
+}
+
 .setting {
   display: grid;
   gap: 6px;
