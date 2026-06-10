@@ -82,6 +82,22 @@ h1 {
   line-height: 1.5;
 }
 
+.source-note {
+  max-width: 700px;
+  margin-top: 18px;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--blue);
+  border-radius: 8px;
+  background: #fbfaf6;
+  color: #3b444d;
+  padding: 12px 14px;
+  line-height: 1.45;
+}
+
+.source-note strong {
+  color: var(--ink);
+}
+
 .header-note {
   border-left: 3px solid var(--green);
   padding-left: 16px;
@@ -167,6 +183,11 @@ h1 {
   margin-top: 12px;
   overflow-x: auto;
   padding-bottom: 2px;
+  scrollbar-width: none;
+}
+
+.quick-filters::-webkit-scrollbar {
+  display: none;
 }
 
 .quick-filter {
@@ -297,6 +318,10 @@ h1 {
   border-radius: 8px;
   background: var(--paper);
   box-shadow: var(--shadow);
+}
+
+.profile-card:hover {
+  border-color: #cfc4b6;
 }
 
 .card-top {
