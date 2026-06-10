@@ -42,6 +42,9 @@ const publicProfiles = input.map(profile => {
 
   const publicProfile = {
     organization: cleanText(profile.organization),
+    parentOrganization: cleanText(profile.parentOrganization),
+    profileFocus: cleanText(profile.profileFocus),
+    splitProfile: Boolean(profile.splitProfile),
     themes: (profile.themes || []).map(cleanText).filter(Boolean),
     categories: (profile.categories || []).map(cleanText).filter(Boolean),
     locations: (profile.locations || []).map(cleanText).filter(Boolean),
@@ -64,6 +67,8 @@ const publicProfiles = input.map(profile => {
 
   publicProfile.searchText = [
     publicProfile.organization,
+    publicProfile.parentOrganization,
+    publicProfile.profileFocus,
     publicProfile.themes.join(" "),
     publicProfile.categories.join(" "),
     publicProfile.locations.join(" "),

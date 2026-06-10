@@ -106,6 +106,8 @@ function normalizeProfile(profile) {
   return {
     ...profile,
     organization: cleanText(profile.organization),
+    parentOrganization: cleanText(profile.parentOrganization),
+    profileFocus: cleanText(profile.profileFocus),
     summary: cleanText(profile.summary),
     activities: cleanText(profile.activities),
     categories: (profile.categories || []).map(cleanText).filter(Boolean),
@@ -202,6 +204,8 @@ function profileText(profile) {
   const sources = profile.sourceRefs.slice(0, 12).map(ref => `${ref.label}${ref.page ? ` p.${ref.page}` : ""}`).join("; ");
   return [
     profile.organization,
+    profile.parentOrganization && profile.parentOrganization !== profile.organization ? `Larger organization: ${profile.parentOrganization}` : "",
+    profile.profileFocus ? `Mentor/lab focus: ${profile.profileFocus}` : "",
     `Catalog fields: ${(profile.themes || []).join(", ")}`,
     `Location: ${(profile.locations || []).join(", ") || profile.locationGroup}`,
     `Past placements: ${profile.studentCount} (${(profile.years || []).join(", ")})`,
@@ -253,7 +257,9 @@ function tag(text, kind = "") {
 function renderCard(profile) {
   const node = el.template.content.firstElementChild.cloneNode(true);
   node.dataset.org = profile.organization;
-  node.querySelector(".card-kicker").textContent = `${profile.locationGroup} - ${profile.studentCount} past placement${profile.studentCount === 1 ? "" : "s"} - ${profile.years.join(", ")}`;
+  const parentLabel = profile.parentOrganization && profile.parentOrganization !== profile.organization ? `${profile.parentOrganization} - ` : "";
+  const focusLabel = profile.profileFocus ? `Mentor/lab: ${profile.profileFocus} - ` : "";
+  node.querySelector(".card-kicker").textContent = `${parentLabel}${focusLabel}${profile.locationGroup} - ${profile.studentCount} past placement${profile.studentCount === 1 ? "" : "s"} - ${profile.years.join(", ")}`;
   node.querySelector("h3").textContent = profile.organization;
   node.querySelector(".summary").textContent = short(profile.summary, 420);
   node.querySelector(".activities").textContent = profile.activities ? short(profile.activities, 520) : "No extra activity notes were recovered. Check the past student list and source catalog if you need more detail.";
@@ -271,6 +277,7 @@ function renderCard(profile) {
 
   const tags = node.querySelector(".tags");
   for (const theme of profile.themes.slice(0, 3)) tags.append(tag(theme));
+  if (profile.splitProfile) tags.append(tag("mentor/lab group", "good"));
   tags.append(tag("catalog sourced", "good"));
   if (hasDirectEmail(profile)) tags.append(tag("mentor email", "good"));
   if (isRecent(profile)) tags.append(tag("recent", "good"));
