@@ -1,0 +1,4 @@
+__pycache__/
+*.pyc
+internship_research/_ocr_tmp/
+internship_research/test_page_*.png
