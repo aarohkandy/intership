@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A source-backed guide for finding senior internship options from past Interlake internship catalogs.">
+  <title>Senior Internship Guide</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="shell header-grid">
+      <div>
+        <p class="eyebrow">Interlake internship catalog guide</p>
+        <h1>Senior internships, with sources attached.</h1>
+        <p class="lede">Browse past placements, mentor contacts, catalog page references, and source links so people can verify before they email.</p>
+      </div>
+      <div class="header-note">
+        <strong id="profileCount">343</strong>
+        <span>profiles from 2021-2026</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="tool-band">
+      <div class="shell">
+        <div class="search-row">
+          <label class="search-box">
+            <span>Search</span>
+            <input id="searchInput" type="search" placeholder="Try UW, cancer, law, marketing, remote, Bellevue">
+          </label>
+          <button id="settingsButton" class="button secondary" type="button" aria-expanded="false" aria-controls="settingsPanel">Settings</button>
+        </div>
+
+        <div class="quick-filters" aria-label="Quick filters">
+          <button class="quick-filter is-active" type="button" data-filter="all">All</button>
+          <button class="quick-filter" type="button" data-filter="CS / AI / Data">CS / AI</button>
+          <button class="quick-filter" type="button" data-filter="Biomedical / Health">Health</button>
+          <button class="quick-filter" type="button" data-filter="Research">Research</button>
+          <button class="quick-filter" type="button" data-filter="Government / Law">Law / gov</button>
+          <button class="quick-filter" type="button" data-filter="Business / Marketing">Business</button>
+          <button class="quick-filter" type="button" data-filter="Arts / Media / Music">Arts</button>
+          <button class="quick-filter" type="button" data-filter="Remote">Remote</button>
+          <button class="quick-filter" type="button" data-filter="Eastside">Eastside</button>
+        </div>
+
+        <div id="settingsPanel" class="settings-panel" hidden>
+          <div class="setting">
+            <label for="fieldSelect">Field</label>
+            <select id="fieldSelect">
+              <option value="">Any field</option>
+            </select>
+          </div>
+          <div class="setting">
+            <label for="yearSelect">Catalog year</label>
+            <select id="yearSelect">
+              <option value="">Any year</option>
+            </select>
+          </div>
+          <div class="setting">
+            <label for="sortSelect">Sort by</label>
+            <select id="sortSelect">
+              <option value="fit">Most catalog evidence</option>
+              <option value="recent">Most recent</option>
+              <option value="students">Most past students</option>
+              <option value="name">A-Z</option>
+            </select>
+          </div>
+          <label class="check"><input id="hasEmail" type="checkbox"> Has a mentor email</label>
+          <label class="check"><input id="recentOnly" type="checkbox"> Recent examples only</label>
+          <label class="check"><input id="repeatOnly" type="checkbox"> Hosted more than one student</label>
+          <label class="check"><input id="hideOcr" type="checkbox"> Hide scanned/OCR entries</label>
+          <label class="check"><input id="savedOnly" type="checkbox"> Show saved only</label>
+          <label class="check"><input id="compactView" type="checkbox"> Compact cards</label>
+        </div>
+      </div>
+    </section>
+
+    <section class="shell layout">
+      <aside class="shortlist" aria-label="Saved shortlist">
+        <div class="shortlist-head">
+          <div>
+            <h2>Shortlist</h2>
+            <p>Save places you might email.</p>
+          </div>
+          <span id="savedCount">0</span>
+        </div>
+        <div id="savedList" class="saved-list"></div>
+        <div class="shortlist-actions">
+          <button id="copySaved" class="button secondary" type="button">Copy shortlist</button>
+          <button id="clearSaved" class="button quiet" type="button">Clear</button>
+        </div>
+      </aside>
+
+      <section class="results-area" aria-live="polite">
+        <div class="results-top">
+          <div>
+            <h2 id="resultHeading">Internship profiles</h2>
+            <p id="resultSummary">Loading profiles...</p>
+          </div>
+          <button id="resetFilters" class="button quiet" type="button">Reset filters</button>
+        </div>
+        <div id="cards" class="cards"></div>
+      </section>
+    </section>
+  </main>
+
+  <template id="cardTemplate">
+    <article class="profile-card">
+      <div class="card-top">
+        <div>
+          <p class="card-kicker"></p>
+          <h3></h3>
+        </div>
+        <button class="save-button" type="button"></button>
+      </div>
+      <p class="summary"></p>
+      <div class="tags"></div>
+      <div class="contact-row"></div>
+      <details>
+        <summary>Past students, notes, and sources</summary>
+        <div class="details-grid">
+          <div>
+            <h4>What people did</h4>
+            <p class="activities"></p>
+            <div class="source-block"></div>
+          </div>
+          <div>
+            <h4>Students and catalog pages</h4>
+            <ul class="students"></ul>
+          </div>
+        </div>
+      </details>
+    </article>
+  </template>
+
+  <div id="toast" class="toast" role="status"></div>
+  <script src="./app.js" type="module"></script>
+</body>
+</html>
