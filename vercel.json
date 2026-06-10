@@ -1,4 +1,16 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/senior_internship_finder",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/senior_internship_finder.html",
+      "destination": "/",
+      "permanent": false
+    }
+  ]
 }
